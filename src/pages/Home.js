@@ -1,7 +1,16 @@
 // Home.js
 import grilled from '../assets/grilled chicken and steak.png'
 import dessert from '../assets/dessert.png'
-import seafood from '../assets/sea food and vegetarian.png'
+import githeri from '../assets/githeri minji special.png'
+import chicken from '../assets/chicken kienyeji.png'
+import mukimo from '../assets/Mukimo.png'
+import ugalifish from '../assets/Ugali with fried Tilapia and kachumbari..png'
+import pilau from '../assets/pilau.png'
+// import spicedchips from '../assets/spiced chips.png'
+// import beefwetfry from '../assets/Beef Wet Fry with ugali..png'
+// import fruitsalad from '../assets/fruit salad.png'
+// import seafood from '../assets/sea food and vegetarian.png'
+
 
 export default function Home() {
     return (
@@ -16,10 +25,10 @@ export default function Home() {
             >
                 <div className="absolute inset-0 bg-black/50" />
                 <div className="relative z-10 text-center text-white px-4">
-                    <h1 className="text-4xl md:text-6xl font-bold mb-4">
+                    <h1 className="text-3xl md:text-6xl font-bold mb-4">
                         Welcome to Avenue Grill
                     </h1>
-                    <p className="text-lg md:text-xl mb-6 max-w-2xl mx-auto">
+                    <p className="text-base md:text-xl mb-6 max-w-2xl mx-auto">
                         Experience the finest grills and authentic flavors in town.
                     </p>
                     <a
@@ -33,34 +42,34 @@ export default function Home() {
 
             {/* Specials Section */}
             <section className="max-w-6xl mx-auto px-4 py-16">
-                <h2 className="text-3xl font-bold mb-8 text-center">Our Specials</h2>
+                <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">Our Specials</h2>
                 <p className="text-gray-600 text-center mb-6">
                     A taste of what we offer…
                 </p>
-                <div className="grid md:grid-cols-3 gap-8">
+                <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
                     <div className="bg-white shadow rounded-lg p-4 text-center">
                         <img
                             src={grilled}
                             alt="Grilled Steak"
-                            className="rounded-lg mb-4 h-40 w-full object-cover"
+                            className="rounded-lg mb-4 h-[500px] w-full object-cover"
                         />
                         <h3 className="font-semibold text-lg">Grilled Steak</h3>
                         <p className="text-gray-500 text-sm">Juicy, flame-grilled perfection.</p>
                     </div>
                     <div className="bg-white shadow rounded-lg p-4 text-center">
                         <img
-                            src={seafood}
-                            alt="Pasta Dish"
-                            className="rounded-lg mb-4 h-40 w-full object-cover"
+                            src={chicken}
+                            alt="chicken kienyeji"
+                            className="rounded-lg mb-4 h-[500px] w-full object-cover"
                         />
-                        <h3 className="font-semibold text-lg">Sea Food/Vegetarian</h3>
-                        <p className="text-gray-500 text-sm">Rich flavors with homegrown veggies.</p>
+                        <h3 className="font-semibold text-lg">Kienyeji Chicken</h3>
+                        <p className="text-gray-500 text-sm">Served in rich, savoury soup with a burst of flavors.</p>
                     </div>
                     <div className="bg-white shadow rounded-lg p-4 text-center">
                         <img
                             src={dessert}
                             alt="Dessert"
-                            className="rounded-lg mb-4 h-40 w-full object-cover"
+                            className="rounded-lg mb-4 h-[500px] w-full object-cover"
                         />
                         <h3 className="font-semibold text-lg">Sweet Treat</h3>
                         <p className="text-gray-500 text-sm">The perfect ending to your meal.</p>
@@ -74,10 +83,10 @@ export default function Home() {
                     <img
                         src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=600&q=80"
                         alt="About us"
-                        className="rounded-lg shadow-lg"
+                        className="rounded-lg shadow-lg w-full h-[500px] object-cover"
                     />
                     <div>
-                        <h2 className="text-3xl font-bold mb-4">About Us</h2>
+                        <h2 className="text-2xl md:text-3xl font-bold mb-4">About Us</h2>
                         <p className="text-gray-600 mb-4">
                             At Avenue Grill & Restaurant, we believe every meal should be an
                             experience. From the freshest ingredients to our welcoming
@@ -95,30 +104,30 @@ export default function Home() {
 
             {/* Gallery Preview */}
             <section className="max-w-6xl mx-auto px-4 py-16">
-                <h2 className="text-3xl font-bold mb-8 text-center">Gallery</h2>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">Gallery</h2>
+                <div className="grid sm:grid-cols-2 md:grid-cols-2 gap-6">
                     <img
-                        src="https://images.unsplash.com/photo-1600891963903-c98f6a1d7e40?auto=format&fit=crop&w=600&q=80"
-                        alt="Dish 1"
-                        className="rounded-lg object-cover h-40 w-full"
+                        src={githeri}
+                        alt="githeri"
+                        className="rounded-lg mb-4 h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] w-full object-cover"
                     />
                     <img
-                        src="https://images.unsplash.com/photo-1600891964139-03a7e9628f55?auto=format&fit=crop&w=600&q=80"
+                        src={mukimo}
                         alt="Dish 2"
-                        className="rounded-lg object-cover h-40 w-full"
+                        className="rounded-lg mb-4 h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] w-full object-cover"
                     />
                     <img
-                        src="https://images.unsplash.com/photo-1600891964769-86d3a3f5a9a5?auto=format&fit=crop&w=600&q=80"
+                        src={pilau}
                         alt="Dish 3"
-                        className="rounded-lg object-cover h-40 w-full"
+                        className="rounded-lg mb-4 h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] w-full object-cover"
                     />
                     <img
-                        src="https://images.unsplash.com/photo-1600891964993-3f3450db59bd?auto=format&fit=crop&w=600&q=80"
+                        src={ugalifish}
                         alt="Dish 4"
-                        className="rounded-lg object-cover h-40 w-full"
+                        className="rounded-lg mb-4 h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] w-full object-cover"
                     />
                 </div>
-                <div className="text-center mt-6">
+                <div className="text-center mt-8">
                     <a
                         href="/gallery"
                         className="inline-block bg-orange-600 text-white px-6 py-3 rounded-full font-medium hover:bg-orange-400 transition"
@@ -131,7 +140,7 @@ export default function Home() {
             {/* Contact Preview */}
             <section className="bg-gray-100 py-16">
                 <div className="max-w-4xl mx-auto px-4 text-center">
-                    <h2 className="text-3xl font-bold mb-4">Get in Touch</h2>
+                    <h2 className="text-2xl md:text-3xl font-bold mb-4">Get in Touch</h2>
                     <p className="text-gray-600 mb-6">
                         Ready to reserve a table or have a question? Reach out to us today!
                     </p>
@@ -144,5 +153,5 @@ export default function Home() {
                 </div>
             </section>
         </main>
-    );
+    )
 }

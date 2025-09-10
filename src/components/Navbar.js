@@ -1,15 +1,22 @@
 import { Link, NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import logo from "../assets/logo.png";
-
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
 
-
     const linkBase =
         "px-3 py-2 text-sm font-medium transition-colors hover:text-orange-500";
+    const activeLink = "text-orange-600 font-semibold";
 
+    // Optional: close menu when resizing to desktop
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 768) setIsOpen(false);
+        };
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     return (
         <header className="sticky top-0 z-50 bg-white shadow">
@@ -17,44 +24,157 @@ export default function Navbar() {
                 {/* ✅ Logo */}
                 <Link to="/" className="flex items-center space-x-2">
                     <img src={logo} alt="Avenue Grill Logo" className="h-10 w-auto" />
-                    <span className="font-bold text-sm text-orange-500">Avenue Grill & Restaurant</span>
+                    <span className="font-bold text-sm text-orange-500">
+                        Avenue Grill & Restaurant
+                    </span>
                 </Link>
-        
 
-                {/* Desktop Nav */}
+                {/* ✅ Desktop Nav */}
                 <nav className="hidden md:flex gap-4">
-                    <NavLink to="/" className={linkBase}>Home</NavLink>
-                    <NavLink to="/menu" className={linkBase}>Menu</NavLink>
-                    <NavLink to="/reservations" className={linkBase}>Reservations</NavLink>
-                    <NavLink to="/about" className={linkBase}>About</NavLink>
-                    <NavLink to="/gallery" className={linkBase}>Gallery</NavLink>
-                    <NavLink to="/contact" className={linkBase}>Contact</NavLink>
+                    <NavLink
+                        to="/"
+                        className={({ isActive }) =>
+                            `${linkBase} ${isActive ? activeLink : ""}`
+                        }
+                    >
+                        Home
+                    </NavLink>
+                    <NavLink
+                        to="/menu"
+                        className={({ isActive }) =>
+                            `${linkBase} ${isActive ? activeLink : ""}`
+                        }
+                    >
+                        Menu
+                    </NavLink>
+                    <NavLink
+                        to="/reservations"
+                        className={({ isActive }) =>
+                            `${linkBase} ${isActive ? activeLink : ""}`
+                        }
+                    >
+                        Reservations
+                    </NavLink>
+                    <NavLink
+                        to="/about"
+                        className={({ isActive }) =>
+                            `${linkBase} ${isActive ? activeLink : ""}`
+                        }
+                    >
+                        About
+                    </NavLink>
+                    <NavLink
+                        to="/gallery"
+                        className={({ isActive }) =>
+                            `${linkBase} ${isActive ? activeLink : ""}`
+                        }
+                    >
+                        Gallery
+                    </NavLink>
+                    <NavLink
+                        to="/contact"
+                        className={({ isActive }) =>
+                            `${linkBase} ${isActive ? activeLink : ""}`
+                        }
+                    >
+                        Contact
+                    </NavLink>
                 </nav>
 
-
-                {/* Mobile Toggle */}
+                {/* ✅ Mobile Toggle */}
                 <button
-                    className="md:hidden p-2 text-gray-700"
+                    className="md:hidden p-2 text-gray-700 focus:outline-none"
                     onClick={() => setIsOpen(!isOpen)}
+                    aria-label="Toggle Menu"
                 >
-                    ☰
+                    {/* Hamburger Icon */}
+                    <svg
+                        className="w-6 h-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        {isOpen ? (
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M6 18L18 6M6 6l12 12"
+                            />
+                        ) : (
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M4 6h16M4 12h16M4 18h16"
+                            />
+                        )}
+                    </svg>
                 </button>
             </div>
 
-
-            {/* Mobile Menu */}
-            {isOpen && (
-                <div className="md:hidden bg-white border-t">
-                    <nav className="flex flex-col px-4 py-2">
-                        <NavLink to="/" className={linkBase} onClick={() => setIsOpen(false)}>Home</NavLink>
-                        <NavLink to="/menu" className={linkBase} onClick={() => setIsOpen(false)}>Menu</NavLink>
-                        <NavLink to="/reservations" className={linkBase} onClick={() => setIsOpen(false)}>Reservations</NavLink>
-                        <NavLink to="/about" className={linkBase} onClick={() => setIsOpen(false)}>About</NavLink>
-                        <NavLink to="/gallery" className={linkBase} onClick={() => setIsOpen(false)}>Gallery</NavLink>
-                        <NavLink to="/contact" className={linkBase} onClick={() => setIsOpen(false)}>Contact</NavLink>
-                    </nav>
-                </div>
-            )}
+            {/* ✅ Mobile Menu */}
+            <div
+                className={`md:hidden bg-white border-t overflow-hidden transition-all duration-300 ${isOpen ? "max-h-96" : "max-h-0"
+                    }`}
+            >
+                <nav className="flex flex-col px-4 py-2">
+                    <NavLink
+                        to="/"
+                        className={({ isActive }) =>
+                            `${linkBase} ${isActive ? activeLink : ""}`
+                        }
+                        onClick={() => setIsOpen(false)}
+                    >
+                        Home
+                    </NavLink>
+                    <NavLink
+                        to="/menu"
+                        className={({ isActive }) =>
+                            `${linkBase} ${isActive ? activeLink : ""}`
+                        }
+                        onClick={() => setIsOpen(false)}
+                    >
+                        Menu
+                    </NavLink>
+                    <NavLink
+                        to="/reservations"
+                        className={({ isActive }) =>
+                            `${linkBase} ${isActive ? activeLink : ""}`
+                        }
+                        onClick={() => setIsOpen(false)}
+                    >
+                        Reservations
+                    </NavLink>
+                    <NavLink
+                        to="/about"
+                        className={({ isActive }) =>
+                            `${linkBase} ${isActive ? activeLink : ""}`
+                        }
+                        onClick={() => setIsOpen(false)}
+                    >
+                        About
+                    </NavLink>
+                    <NavLink
+                        to="/gallery"
+                        className={({ isActive }) =>
+                            `${linkBase} ${isActive ? activeLink : ""}`
+                        }
+                        onClick={() => setIsOpen(false)}
+                    >
+                        Gallery
+                    </NavLink>
+                    <NavLink
+                        to="/contact"
+                        className={({ isActive }) =>
+                            `${linkBase} ${isActive ? activeLink : ""}`
+                        }
+                        onClick={() => setIsOpen(false)}
+                    >
+                        Contact
+                    </NavLink>
+                </nav>
+            </div>
         </header>
     );
 }
