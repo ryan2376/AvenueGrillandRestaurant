@@ -8,7 +8,7 @@ export default function Navbar() {
 
 
     const linkBase =
-        "px-3 py-2 text-sm font-medium transition-colors hover:text-red-500";
+        "px-3 py-2 text-sm font-medium transition-colors hover:text-orange-500";
 
 
     return (
@@ -17,7 +17,7 @@ export default function Navbar() {
                 {/* ✅ Logo */}
                 <Link to="/" className="flex items-center space-x-2">
                     <img src={logo} alt="Avenue Grill Logo" className="h-10 w-auto" />
-                    <span className="font-bold text-xl text-red-600">Avenue Grill</span>
+                    <span className="font-bold text-sm text-orange-500">Avenue Grill & Restaurant</span>
                 </Link>
         
 
