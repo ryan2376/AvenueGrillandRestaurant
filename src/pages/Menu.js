@@ -48,8 +48,8 @@ export default function Menu() {
                             key={cat}
                             onClick={() => setActiveCategory(cat)}
                             className={`px-3 py-1 rounded-full text-sm border ${activeCategory === cat
-                                    ? "bg-orange-600 text-white border-orange-600"
-                                    : "bg-white text-gray-700"
+                                ? "bg-orange-600 text-white border-orange-600"
+                                : "bg-white text-gray-700"
                                 }`}
                         >
                             {cat}
@@ -66,6 +66,34 @@ export default function Menu() {
                     />
                 </div>
             </div>
+
+            {/* Full Menu Preview + Download */}
+            <section className="mb-12 text-center">
+                <h2 className="text-2xl font-bold mb-4">Full Menu</h2>
+                <p className="text-gray-600 mb-6">
+                    Browse the designed version of our menu or download the PDF.
+                </p>
+                <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+                    <img
+                        src={require("../assets/menu-page1.jpg")}
+                        alt="Menu Page 1"
+                        className="w-64 rounded-lg shadow-lg border"
+                    />
+                    <img
+                        src={require("../assets/menu-page2.jpg")}
+                        alt="Menu Page 2"
+                        className="w-64 rounded-lg shadow-lg border"
+                    />
+                </div>
+                <a
+                    href="/menu.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block mt-6 bg-orange-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-orange-500 transition"
+                >
+                    📄 View / Download Full Menu (PDF)
+                </a>
+            </section>
 
             {/* Grid */}
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">

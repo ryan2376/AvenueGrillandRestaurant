@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useCart } from "../context/CartContext";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 export default function Cart() {
     const { items, updateQuantity, removeItem, clearCart } = useCart();
@@ -148,7 +149,13 @@ export default function Cart() {
                             Total: <span className="text-orange-600">Ksh {total}</span>
                         </h3>
 
-                        <div className="flex gap-3">
+                        <div className="flex gap-3 flex-wrap">
+                            <Link
+                                to="/menu"
+                                className="bg-orange-100 text-orange-600 px-5 py-2 rounded-md hover:bg-orange-200"
+                            >
+                                ← Continue Shopping
+                            </Link>
                             <a
                                 href={
                                     canSend
@@ -158,8 +165,8 @@ export default function Cart() {
                                 target="_blank"
                                 rel="noreferrer"
                                 className={`px-5 py-2 rounded-md text-white ${canSend
-                                        ? "bg-green-600 hover:bg-green-500"
-                                        : "bg-gray-400 cursor-not-allowed"
+                                    ? "bg-green-600 hover:bg-green-500"
+                                    : "bg-gray-400 cursor-not-allowed"
                                     }`}
                                 onClick={(e) => {
                                     if (!canSend) {
