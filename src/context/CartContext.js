@@ -1,68 +1,55 @@
 // src/context/CartContext.js
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const CartContext = createContext();
 
-const initialState = {
-    items: [],
-};
-
-function reducer(state, action) {
-    switch (action.type) {
-        case "ADD_ITEM": {
-            const existing = state.items.find((i) => i.id === action.payload.id);
-            if (existing) {
-                return {
-                    ...state,
-                    items: state.items.map((i) =>
-                        i.id === action.payload.id
-                            ? { ...i, quantity: i.quantity + 1 }
-                            : i
-                    ),
-                };
-            }
-            return {
-                ...state,
-                items: [...state.items, { ...action.payload, quantity: 1 }],
-            };
-        }
-        case "REMOVE_ITEM":
-            return {
-                ...state,
-                items: state.items.filter((i) => i.id !== action.payload),
-            };
-        case "CLEAR_CART":
-            return initialState;
-        case "UPDATE_QUANTITY":
-            return {
-                ...state,
-                items: state.items.map((i) =>
-                    i.id === action.payload.id
-                        ? { ...i, quantity: action.payload.quantity }
-                        : i
-                ),
-            };
-        default:
-            return state;
-    }
-}
-
 export function CartProvider({ children }) {
-    const [state, dispatch] = useReducer(reducer, initialState);
+    const [items, setItems] = useState(() => {
+        // Load from localStorage on first render
+        const stored = localStorage.getItem("cart");
+        return stored ? JSON.parse(stored) : [];
+    });
 
-    const addItem = (item) => dispatch({ type: "ADD_ITEM", payload: item });
-    const removeItem = (id) => dispatch({ type: "REMOVE_ITEM", payload: id });
-    const updateQuantity = (id, quantity) =>
-        dispatch({ type: "UPDATE_QUANTITY", payload: { id, quantity } });
-    const clearCart = () => dispatch({ type: "CLEAR_CART" });
+    // Persist to localStorage whenever items change
+    useEffect(() => {
+        localStorage.setItem("cart", JSON.stringify(items));
+    }, [items]);
+
+    const addItem = (item) => {
+        setItems((prev) => {
+            const existing = prev.find((i) => i.id === item.id);
+            if (existing) {
+                return prev.map((i) =>
+                    i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
+                );
+            }
+            return [...prev, { ...item, quantity: 1 }];
+        });
+    };
+
+    const updateQuantity = (id, qty) => {
+        setItems((prev) =>
+            prev.map((i) => (i.id === id ? { ...i, quantity: qty } : i))
+        );
+    };
+
+    const removeItem = (id) => {
+        setItems((prev) => prev.filter((i) => i.id !== id));
+    };
+
+    const clearCart = () => {
+        setItems([]);
+    };
 
     return (
         <CartContext.Provider
-            value={{ items: state.items, addItem, removeItem, updateQuantity, clearCart }}
+            value={{ items, addItem, updateQuantity, removeItem, clearCart }}
         >
             {children}
         </CartContext.Provider>
     );
 }
 
-export const useCart = () => useContext(CartContext);
+export function useCart() {
+    return useContext(CartContext);
+}
