@@ -21,8 +21,24 @@ export default function Contact() {
     return (
         <main>
             {/* Hero Section */}
-            <section className="relative h-[40vh] bg-orange-600 flex items-center justify-center text-white">
-                <h1 className="text-4xl md:text-5xl font-bold">Contact Us</h1>
+            <section
+                className="relative h-[50vh] bg-cover bg-center flex items-center justify-center"
+                style={{
+                    backgroundImage:
+                        "url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1600&q=80')",
+                }}
+                
+            >
+                <div className="absolute inset-0 bg-black/50" />
+                <div className="relative z-10 text-center text-white px-4">
+                    <h1 className="text-3xl md:text-6xl font-bold mb-4">
+                        Contact Us
+                    </h1>
+                    <p className="text-base md:text-xl mb-6 max-w-2xl mx-auto">
+                        Experience the finest grills and authentic flavors in town.
+                    </p>
+                
+                </div>
             </section>
 
             {/* Contact Info + Form */}
@@ -37,14 +53,14 @@ export default function Contact() {
                     <ul className="space-y-4 text-gray-700">
                         <li><strong>📞 Phone:</strong> +254 700 123 456</li>
                         <li><strong>📧 Email:</strong> info@avenuegrill.com</li>
-                        <li><strong>📍 Address:</strong> Meru, Kenya</li>
+                        <li><strong>📍 Address:</strong>  Located on 1st floor of Avenue Mall, above Selenite Supermarket along the Meru-Nairobi highway!</li>
                     </ul>
 
                     {/* Google Maps */}
                     <div className="mt-6">
                         <iframe
                             title="Google Maps"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.672776748895!2d37.6502!3d0.0463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x18256389c0a0e2c5%3A0x9f0f1df676a9a65a!2sMeru!5e0!3m2!1sen!2ske!4v1694160000000!5m2!1sen!2ske"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d17766.41746675639!2d37.650978335177065!3d0.044585443695301465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x178821d2c7265cd7%3A0xa9ca854b6a0bc0c8!2sAvenue%20Grill%20and%20Restaurant%2C%20Gitimbine!5e0!3m2!1sen!2ske!4v1757584345677!5m2!1sen!2ske" 
                             width="100%"
                             height="250"
                             style={{ border: 0 }}

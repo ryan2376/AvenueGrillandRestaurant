@@ -43,7 +43,7 @@ export default function Home() {
             {/* Specials Section */}
             <section className="max-w-6xl mx-auto px-4 py-16">
                 <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">Our Specials</h2>
-                <p className="text-gray-600 text-center mb-6">
+                <p className=" text-orange-500 text-center mb-6 ">
                     A taste of what we offer…
                 </p>
                 <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
