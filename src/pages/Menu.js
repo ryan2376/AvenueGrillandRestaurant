@@ -48,8 +48,8 @@ export default function Menu() {
                             key={cat}
                             onClick={() => setActiveCategory(cat)}
                             className={`px-3 py-1 rounded-full text-sm border ${activeCategory === cat
-                                ? "bg-orange-600 text-white border-orange-600"
-                                : "bg-white text-gray-700"
+                                    ? "bg-orange-600 text-white border-orange-600"
+                                    : "bg-white text-gray-700"
                                 }`}
                         >
                             {cat}
@@ -173,10 +173,11 @@ export default function Menu() {
 
                                 <button
                                     onClick={() => {
-                                        addItem(item);
-                                        toast.success(`${item.name} added to cart ✅`);
+                                        addItem(selected);
+                                        toast.success(`${selected.name} added to cart ✅`);
+                                        setSelected(null);
                                     }}
-                                    className="px-3 py-1 rounded-md bg-orange-600 text-white text-sm hover:bg-orange-500"
+                                    className="inline-block bg-orange-600 text-white px-5 py-2 rounded-md hover:bg-orange-500"
                                 >
                                     Add to Cart
                                 </button>

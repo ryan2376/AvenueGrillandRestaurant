@@ -8,6 +8,7 @@ import About from "./pages/About";
 import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
 import Cart from "./pages/Cart"; // ✅ import Cart page
+import { Toaster } from "react-hot-toast";
 
 export default function App() {
     return (

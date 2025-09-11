@@ -2,7 +2,7 @@
 import grilled from "../assets/grilled chicken and steak.png";
 import chicken from "../assets/chicken kienyeji.png";
 import dessert from "../assets/dessert.png";
-import seafood from "../assets/sea food and vegetarian.png";
+// import seafood from "../assets/sea food and vegetarian.png";
 import fruitsalad from "../assets/fruit salad.png";
 import beefwetfry from "../assets/Beef Wet Fry with ugali..png";
 import mukimo from "../assets/Mukimo.png";

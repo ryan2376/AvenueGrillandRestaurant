@@ -1,33 +1,54 @@
 // src/pages/Cart.js
 import { useState } from "react";
 import { useCart } from "../context/CartContext";
+import toast from "react-hot-toast";
 
 export default function Cart() {
     const { items, updateQuantity, removeItem, clearCart } = useCart();
     const [customerName, setCustomerName] = useState("");
     const [customerPhone, setCustomerPhone] = useState("");
 
+    // Phone helpers
+    const digitsOnly = (s) => s.replace(/\D/g, "");
+
+    const isValidPhone = (phone) => {
+        const d = digitsOnly(phone);
+        // Kenyan numbers: 07XXXXXXXX (10 digits) / 7XXXXXXXX (9 digits) / 2547XXXXXXXX (12 digits)
+        return (
+            (d.length === 10 && d.startsWith("0") && d[1] === "7") ||
+            (d.length === 9 && d.startsWith("7")) ||
+            (d.length === 12 && d.startsWith("254"))
+        );
+    };
+
+    const formatPhoneForDisplay = (phone) => {
+        const d = digitsOnly(phone);
+        if (d.length === 10 && d.startsWith("0")) return "254" + d.slice(1);
+        if (d.length === 9 && d.startsWith("7")) return "254" + d;
+        if (d.length === 12 && d.startsWith("254")) return d;
+        return d; // fallback
+    };
+
     // Calculate total
-    const total = items.reduce((sum, i) => {
-        return sum + (i.price || 0) * i.quantity;
-    }, 0);
+    const total = items.reduce((sum, i) => sum + (i.price || 0) * i.quantity, 0);
 
     // Build WhatsApp message
     const buildMessage = () => {
+        const phoneFormatted = formatPhoneForDisplay(customerPhone) || "N/A";
         let message = `🛒 New Order from Avenue Grill Website\n\n`;
         message += `Name: ${customerName || "N/A"}\n`;
-        message += `Phone: ${customerPhone || "N/A"}\n\n`;
+        message += `Phone: ${phoneFormatted}\n\n`;
         message += `Order:\n`;
-
         items.forEach((i) => {
             message += `- ${i.quantity}x ${i.name} - Ksh ${i.price || "?"}\n`;
         });
-
         message += `\nTotal: Ksh ${total}\n`;
         return encodeURIComponent(message);
     };
 
-    const whatsappNumber = "254790928660"; // Replace with your restaurant's WhatsApp
+    const whatsappNumber = "254790928660"; // Replace with your WhatsApp number
+    const canSend =
+        items.length > 0 && customerName.trim() !== "" && isValidPhone(customerPhone);
 
     return (
         <main className="max-w-5xl mx-auto px-4 py-16">
@@ -85,7 +106,10 @@ export default function Cart() {
                                 </div>
 
                                 <button
-                                    onClick={() => removeItem(item.id)}
+                                    onClick={() => {
+                                        removeItem(item.id);
+                                        toast.success(`${item.name} removed from cart`);
+                                    }}
                                     className="ml-4 text-red-500 hover:underline"
                                 >
                                     Remove
@@ -107,12 +131,15 @@ export default function Cart() {
                             />
                             <input
                                 type="text"
-                                placeholder="Your Phone Number"
+                                placeholder="Your Phone Number (e.g. 07XXXXXXXX or 2547XXXXXXXX)"
                                 value={customerPhone}
                                 onChange={(e) => setCustomerPhone(e.target.value)}
                                 className="border rounded-lg px-3 py-2 w-full"
                             />
                         </div>
+                        <p className="text-sm mt-2 text-gray-500">
+                            Use 07XXXXXXXX or 2547XXXXXXXX. We will format it for WhatsApp.
+                        </p>
                     </div>
 
                     {/* Summary + Checkout */}
@@ -123,15 +150,38 @@ export default function Cart() {
 
                         <div className="flex gap-3">
                             <a
-                                href={`https://wa.me/${whatsappNumber}?text=${buildMessage()}`}
+                                href={
+                                    canSend
+                                        ? `https://wa.me/${whatsappNumber}?text=${buildMessage()}`
+                                        : undefined
+                                }
                                 target="_blank"
                                 rel="noreferrer"
-                                className="bg-green-600 text-white px-5 py-2 rounded-md hover:bg-green-500"
+                                className={`px-5 py-2 rounded-md text-white ${canSend
+                                        ? "bg-green-600 hover:bg-green-500"
+                                        : "bg-gray-400 cursor-not-allowed"
+                                    }`}
+                                onClick={(e) => {
+                                    if (!canSend) {
+                                        e.preventDefault();
+                                        if (items.length === 0) toast.error("Cart is empty");
+                                        else if (!customerName.trim())
+                                            toast.error("Please enter your name");
+                                        else if (!isValidPhone(customerPhone))
+                                            toast.error("Please enter a valid phone number");
+                                    } else {
+                                        toast.success("Opening WhatsApp…");
+                                    }
+                                }}
                             >
                                 Send Order via WhatsApp
                             </a>
+
                             <button
-                                onClick={clearCart}
+                                onClick={() => {
+                                    clearCart();
+                                    toast.success("Cart cleared");
+                                }}
                                 className="bg-gray-200 px-5 py-2 rounded-md hover:bg-gray-300"
                             >
                                 Clear Cart
