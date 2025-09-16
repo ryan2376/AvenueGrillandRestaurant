@@ -96,13 +96,13 @@ export default function Menu() {
             </section>
 
             {/* Grid */}
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {filteredItems.map((item) => (
                     <div
                         key={item.id}
                         className="bg-white rounded-lg shadow p-4 flex flex-col h-full"
                     >
-                        <div className="h-40 mb-3 overflow-hidden rounded">
+                        <div className="aspect-[3/2] mb-3 overflow-hidden rounded">
                             {item.image ? (
                                 <img
                                     src={item.image}
@@ -117,9 +117,9 @@ export default function Menu() {
                         </div>
 
                         <div className="flex-1">
-                            <h3 className="font-semibold text-lg">{item.name}</h3>
+                            <h3 className="font-semibold text-base">{item.name}</h3>
                             {item.desc && (
-                                <p className="text-sm text-gray-600 mt-1">{item.desc}</p>
+                                <p3 className="text-sm text-gray-600 mt-1">{item.desc}</p3>
                             )}
                         </div>
 
